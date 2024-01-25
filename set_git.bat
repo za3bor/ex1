@@ -8,5 +8,5 @@ git init
 git add .
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/[set your github repository path].git
+git remote add origin https://github.com/za3bor/ex1.git
 git push -u origin main
