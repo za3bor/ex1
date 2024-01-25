@@ -42,17 +42,34 @@
         .button {
             float: left;
             height: 50px;
-            width: 25%;
+            width: 20%;
             margin: 5px;
             background-color: #76c8f1;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1.2em;
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
         }
 
         .button:hover {
-            background-color: #fff;
+            background-color: #55a0dd;
+        }
+
+        .button.operator {
+            background-color: #f5923e;
+        }
+
+        .button.equals {
+            grid-column: span 2;
+            background-color: #29a745;
+        }
+
+        .button.clear {
+            background-color: #dc3545;
         }
     </style>
 </head>
@@ -61,23 +78,52 @@
         <h1>Calculator</h1>
         <div class="display" id="display">0</div>
         <div class="row">
+            <button type="button" class="button" onclick="appendToDisplay('Math.sqrt(')">√</button>
+            <button type="button" class="button" onclick="appendToDisplay('(')">(</button>
+            <button type="button" class="button" onclick="appendToDisplay(')')">)</button>
+            <button type="button" class="button" onclick="appendToDisplay('Math.pow(10,')">10^x</button>
+        </div>
+        <div class="row">
+            <button type="button" class="button" onclick="appendToDisplay('Math.log10(')">log</button>
+            <button type="button" class="button" onclick="appendToDisplay('Math.log(')">ln</button>
+            <button type="button" class="button" onclick="appendToDisplay('Math.E')">e</button>
+            <button type="button" class="button" onclick="appendToDisplay('1/')">1/x</button>
+        </div>
+
+        <div class="row">
+            <button type="button" class="button" onclick="appendToDisplay('Math.abs(')">|x|</button>
+            <button type="button" class="button" onclick="appendToDisplay('Math.exp(')">exp</button>
+            <button type="button" class="button" onclick="appendToDisplay('%')">%</button>
+            <button type="button" class="button clear" onclick="clearDisplay()">C</button>
+        </div>
+        <div class="row">
+            <button type="button" class="button" onclick="appendToDisplay('Math.PI')">π</button>
+            <button type="button" class="button" onclick="appendToDisplay('**2')">x²</button>
+            <button type="button" class="button" onclick="appendToDisplay('**')">^</button>
+            <button type="button" class="button operator" onclick="appendToDisplay('/')">/</button>
+        </div>
+        <div class="row">
             <button type="button" class="button" onclick="appendToDisplay('7')">7</button>
             <button type="button" class="button" onclick="appendToDisplay('8')">8</button>
             <button type="button" class="button" onclick="appendToDisplay('9')">9</button>
+            <button type="button" class="button operator" onclick="appendToDisplay('*')">*</button>
+        </div>
+        <div class="row">
             <button type="button" class="button" onclick="appendToDisplay('4')">4</button>
             <button type="button" class="button" onclick="appendToDisplay('5')">5</button>
             <button type="button" class="button" onclick="appendToDisplay('6')">6</button>
+            <button type="button" class="button operator" onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div class="row">
             <button type="button" class="button" onclick="appendToDisplay('1')">1</button>
             <button type="button" class="button" onclick="appendToDisplay('2')">2</button>
             <button type="button" class="button" onclick="appendToDisplay('3')">3</button>
-            <button type="button" class="button" onclick="appendToDisplay('/')">/</button>
-            <button type="button" class="button" onclick="appendToDisplay('*')">*</button>
-            <button type="button" class="button" onclick="appendToDisplay('-')">-</button>
+            <button type="button" class="button operator" onclick="appendToDisplay('+')">+</button>
+        </div>
+        <div class="row">
             <button type="button" class="button" onclick="appendToDisplay('0')">0</button>
             <button type="button" class="button" onclick="appendToDisplay('.')">.</button>
-            <button type="button" class="button" onclick="clearDisplay()">C</button>
-            <button type="button" class="button" onclick="appendToDisplay('+')">+</button>
-            <button type="button" class="button" style="width: 50%;" onclick="calculateResult()">=</button>
+            <button type="button" class="button equals" style="width: 80%;" onclick="calculateResult()">=</button>
         </div>
     </div>
 
@@ -85,7 +131,7 @@
         let display = document.getElementById('display');
 
         function appendToDisplay(value) {
-            if (display.textContent === '0') {
+            if (display.textContent === '0' || display.textContent === 'Error') {
                 display.textContent = value;
             } else {
                 display.textContent += value;
@@ -106,3 +152,4 @@
     </script>
 </body>
 </html>
+   
